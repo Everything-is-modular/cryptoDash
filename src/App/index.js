@@ -1,13 +1,14 @@
 import './App.css';
 import WelcomeMessage from './welcome-message'
 import styled, {css} from 'styled-components'
+import AppLayout from './app-layout';
 
 function App() {
   // TODO TAHS
   return (
-    <div className="App">
+    <AppLayout>
       <WelcomeMessage />
-    </div>
+    </AppLayout>
   );
 }
 
