@@ -1,6 +1,6 @@
 // state manager of App
 import React from "react";
-
+const cc = require('cryptocompare')
 export const AppContext = React.createContext();
 
 export class AppProvider extends React.Component {
@@ -13,6 +13,21 @@ export class AppProvider extends React.Component {
       ...this.savedSettings(),
     };
   }
+
+  componentDidMount() {
+    this.fetchCoins()
+  }
+
+  fetchCoins = async() => {
+    let coinsListResponse = await cc.coinList()
+    if(coinsListResponse && coinsListResponse.Response == 'Success') {
+        let coinsList = coinsListResponse.Data
+        this.setState({
+            coinsList: coinsList,
+        })
+    }
+  }
+
   setPage = (page) => {
     this.setState({
       page: page,
