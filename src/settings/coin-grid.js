@@ -1,7 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { AppContext } from "../App/app-provider";
-import { Tile, SelectableTile } from '../Shared/tile'
 import CoinTile from "./coin-tile";
 
 export const StyledDisplayGrid = styled.div`
@@ -28,3 +27,6 @@ export default function ({topSection}) {
         </AppContext.Consumer>
     )
 }
+
+// StyledDisplayGrid component for layout of coin Tiles
+// CoinTile component to display tiles

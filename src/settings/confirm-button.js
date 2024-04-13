@@ -44,3 +44,6 @@ export default function () {
     </AppContext.Consumer>
   );
 }
+
+// StyledCenterDiv component for layout
+// StyledConfirmButton component for button css

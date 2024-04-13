@@ -25,3 +25,6 @@ export default function ({coinKey, topSection}) {
         </AppContext.Consumer>
     )
 }
+// different styled Tiles shown
+// added a component only for header which has two items => name and symbol/delete icon
+// CoinImage component which return a img tag with alt src style filled
