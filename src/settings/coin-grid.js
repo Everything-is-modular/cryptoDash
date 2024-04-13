@@ -10,15 +10,15 @@ export const StyledDisplayGrid = styled.div`
     margin-top: 40px;
 `
 
-function getCoinsToDisplay(coinsList, topSection) {
-    return Object.keys(coinsList).slice(0,topSection ? 10 : 100)
+function getCoinsToDisplay(coinsList, topSection, favorites) {
+    return topSection ? favorites :  Object.keys(coinsList).slice(0, 100)
 }
 
 export default function ({topSection}) {
     return(
         <AppContext.Consumer>
-            {({coinsList}) => {
-                return <StyledDisplayGrid>{getCoinsToDisplay(coinsList, topSection).map(coinKey => {
+            {({coinsList, favorites}) => {
+                return <StyledDisplayGrid>{getCoinsToDisplay(coinsList, topSection, favorites).map(coinKey => {
                     return (
                         <CoinTile topSection={topSection} coinKey={coinKey}/>
                     )
