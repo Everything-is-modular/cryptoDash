@@ -9,6 +9,8 @@ export class AppProvider extends React.Component {
     this.state = {
       page: "dashboard",
       setPage: this.setPage,
+      confirmFavorites: this.confirmFavorites,
+      ...this.savedSettings(),
     };
   }
   setPage = (page) => {
@@ -16,6 +18,22 @@ export class AppProvider extends React.Component {
       page: page,
     });
   };
+  savedSettings = () => {
+    let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'))
+    if(!cryptoDashData) {
+        return { page: 'settings',firstVisit: true}
+    }
+    return {}
+  }
+  confirmFavorites = () => {
+    this.setState({
+        page: 'dashboard',
+        firstVisit: false,
+    })
+    localStorage.setItem('cryptoDash', JSON.stringify({
+        test: 'hello'
+    }))
+  }
 
   render() {
     return (
