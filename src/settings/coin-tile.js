@@ -1,11 +1,14 @@
 import React from "react";
 import { AppContext } from "../App/app-provider";
-import { SelectableTile } from "../Shared/tile";
+import { SelectableTile, DeletableTile } from "../Shared/tile";
 import CoinHeaderGrid from "./coin-header-grid";
 import CoinImage from "../Shared/coin-image";
 
-export default function ({coinKey}) {
-    const TileClass = SelectableTile
+export default function ({coinKey, topSection}) {
+    let TileClass = SelectableTile
+    if(topSection) {
+        TileClass = DeletableTile
+    }
     return (
         <AppContext.Consumer>
             {({coinsList}) => {
@@ -14,7 +17,7 @@ export default function ({coinKey}) {
                 let coinSymbol= coin['Symbol']
                 return(
                     <TileClass>
-                        <CoinHeaderGrid name={coinName} symbol={coinSymbol} />
+                        <CoinHeaderGrid topSection={topSection} name={coinName} symbol={coinSymbol} />
                         <CoinImage coin={coin} />
                     </TileClass>
                 )

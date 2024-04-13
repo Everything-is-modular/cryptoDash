@@ -11,17 +11,17 @@ export const StyledDisplayGrid = styled.div`
     margin-top: 40px;
 `
 
-function getCoinsToDisplay(coinsList) {
-    return Object.keys(coinsList).slice(0,100)
+function getCoinsToDisplay(coinsList, topSection) {
+    return Object.keys(coinsList).slice(0,topSection ? 10 : 100)
 }
 
-export default function ({}) {
+export default function ({topSection}) {
     return(
         <AppContext.Consumer>
             {({coinsList}) => {
-                return <StyledDisplayGrid>{getCoinsToDisplay(coinsList).map(coinKey => {
+                return <StyledDisplayGrid>{getCoinsToDisplay(coinsList, topSection).map(coinKey => {
                     return (
-                        <CoinTile coinKey={coinKey}/>
+                        <CoinTile topSection={topSection} coinKey={coinKey}/>
                     )
                 })}</StyledDisplayGrid>
             }}
