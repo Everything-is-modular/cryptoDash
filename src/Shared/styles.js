@@ -3,9 +3,9 @@ const theme = 'dark'
 
 export const lightTheme = theme === 'light'
 
-export const color = ightTheme ? 'white' : '#061a44'
-export const color2 = ightTheme ? 'white' : '#061a44'
-export const color3 = ightTheme ? '#09f010' : '#42ff3a'
+export const color = lightTheme ? 'white' : '#061a44'
+export const color2 = lightTheme ? 'white' : '#061a44'
+export const color3 = lightTheme ? '#09f010' : '#42ff3a'
 
 if(lightTheme) {
     document.body.style.background = '#e1eaee'

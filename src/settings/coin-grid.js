@@ -1,10 +1,12 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { AppContext } from "../App/app-provider";
+import { Tile, SelectableTile } from '../Shared/tile'
 
 export const StyledDisplayGrid = styled.div`
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    grid-gap: 15px;
 `
 
 export default function ({}) {
@@ -13,9 +15,9 @@ export default function ({}) {
             {({coinsList}) => {
                 return <StyledDisplayGrid>{Object.keys(coinsList).map(coinKey => {
                     return (
-                        <div>
+                        <SelectableTile key={coinKey}>
                             {coinKey}
-                        </div>
+                        </SelectableTile>
                     )
                 })}</StyledDisplayGrid>
             }}
