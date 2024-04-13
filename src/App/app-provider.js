@@ -1,6 +1,7 @@
 // state manager of App
 import React from "react";
-const cc = require('cryptocompare')
+import {CRYPTO_API_KEY} from '../config/config'
+const cc = require("cryptocompare");
 export const AppContext = React.createContext();
 
 export class AppProvider extends React.Component {
@@ -15,18 +16,19 @@ export class AppProvider extends React.Component {
   }
 
   componentDidMount() {
-    this.fetchCoins()
+    cc.setApiKey(CRYPTO_API_KEY);
+    this.fetchCoins();
   }
 
-  fetchCoins = async() => {
-    let coinsListResponse = await cc.coinList()
-    if(coinsListResponse && coinsListResponse.Response == 'Success') {
-        let coinsList = coinsListResponse.Data
-        this.setState({
-            coinsList: coinsList,
-        })
+  fetchCoins = async () => {
+    let coinsListResponse = await cc.coinList();
+    if (coinsListResponse && coinsListResponse.Response == "Success") {
+      let coinsList = coinsListResponse.Data;
+      this.setState({
+        coinsList: coinsList,
+      });
     }
-  }
+  };
 
   setPage = (page) => {
     this.setState({
@@ -34,21 +36,24 @@ export class AppProvider extends React.Component {
     });
   };
   savedSettings = () => {
-    let cryptoDashData = JSON.parse(localStorage.getItem('cryptoDash'))
-    if(!cryptoDashData) {
-        return { page: 'settings',firstVisit: true}
+    let cryptoDashData = JSON.parse(localStorage.getItem("cryptoDash"));
+    if (!cryptoDashData) {
+      return { page: "settings", firstVisit: true };
     }
-    return {}
-  }
+    return {};
+  };
   confirmFavorites = () => {
     this.setState({
-        page: 'dashboard',
-        firstVisit: false,
-    })
-    localStorage.setItem('cryptoDash', JSON.stringify({
-        test: 'hello'
-    }))
-  }
+      page: "dashboard",
+      firstVisit: false,
+    });
+    localStorage.setItem(
+      "cryptoDash",
+      JSON.stringify({
+        test: "hello",
+      })
+    );
+  };
 
   render() {
     return (
@@ -59,3 +64,6 @@ export class AppProvider extends React.Component {
     );
   }
 }
+
+/* Pushing APIs to GitHub is not advisable. Anyone can find your keys and use them to make API requests. By using an untracked .env file, you prevent this from happening.
+However, you should never store sensitive secrets in a .env file in your frontend code because anyone can see it when they inspect your code. Instead, fetch the data on the server side or use Next.js to mask private variables. */
