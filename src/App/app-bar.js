@@ -45,3 +45,6 @@ export default function () {
     </Bar>
   );
 }
+
+//every small component has its StyledComponent
+// Bar styledComponent which provides grid display to the children
