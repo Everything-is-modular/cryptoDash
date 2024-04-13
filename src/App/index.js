@@ -1,15 +1,18 @@
-import './App.css';
-import WelcomeMessage from './welcome-message'
-import styled, {css} from 'styled-components'
-import AppLayout from './app-layout';
-import AppBar from './app-bar';
+import "./App.css";
+import WelcomeMessage from "./welcome-message";
+import styled, { css } from "styled-components";
+import AppLayout from "./app-layout";
+import AppBar from "./app-bar";
+import { AppProvider } from "./app-provider";
 
 function App() {
   // TODO TAHS
   return (
     <AppLayout>
-      <AppBar />
-      <WelcomeMessage />
+      <AppProvider>
+        <AppBar />
+        <WelcomeMessage />
+      </AppProvider>
     </AppLayout>
   );
 }

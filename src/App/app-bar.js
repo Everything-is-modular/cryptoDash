@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import { toProperCase } from './helpers'
+import { toProperCase } from "./helpers";
+import { AppContext } from "./app-provider";
 
 const Bar = styled.div`
   display: grid;
@@ -16,12 +17,22 @@ const ControlButtonElem = styled.div`
   ${(props) =>
     props.active &&
     css`
-      text-shadow: 0px 0px 60px #03ff03;
+      text-shadow: 0px 5px 10px #04fa04;
     `}
 `;
 
 function ControlButton({ name, active }) {
-  return <ControlButtonElem active={active}>{toProperCase(name)}</ControlButtonElem>;
+  return (
+    <AppContext.Consumer>
+      {/* Consumer will take a callback */}
+      {({page, setPage}) => (
+        <ControlButtonElem active={page == name} onClick={() => setPage(name)}>
+        {toProperCase(name)}
+      </ControlButtonElem>
+      )}
+
+    </AppContext.Consumer>
+  );
 }
 
 export default function () {
@@ -29,8 +40,8 @@ export default function () {
     <Bar>
       <Logo>CryptoDash</Logo>
       <div></div>
-      <ControlButton active name={'dashboard'} />
-      <ControlButton name={'settings'} />
+      <ControlButton active name={"dashboard"} />
+      <ControlButton name={"settings"} />
     </Bar>
   );
 }
