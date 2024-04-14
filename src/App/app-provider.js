@@ -13,11 +13,13 @@ export class AppProvider extends React.Component {
     this.state = {
       page: "dashboard",
       favorites: ["BTC"],
+      prices:[],
       setPage: this.setPage,
       confirmFavorites: this.confirmFavorites,
       addCoin: this.addCoin,
       removeCoin: this.removeCoin,
       isInFavorites: this.isInFavorites,
+      setFilteredCoins: this.setFilteredCoins,
       ...this.savedSettings(),
     };
   }
@@ -25,6 +27,7 @@ export class AppProvider extends React.Component {
   componentDidMount() {
     cc.setApiKey(CRYPTO_API_KEY);
     this.fetchCoins();
+    this.fetchPrices()
   }
 
   addCoin = (key) => {
@@ -69,7 +72,7 @@ export class AppProvider extends React.Component {
       return { page: "settings", firstVisit: true };
     } else {
       const {favorites} = cryptoDashData
-      return {favorites}
+      return {favorites, firstVisit:false}
     }
     return {};
   };
@@ -77,6 +80,8 @@ export class AppProvider extends React.Component {
     this.setState({
       page: "dashboard",
       firstVisit: false,
+    }, () => {
+      this.fetchPrices()
     });
     localStorage.setItem(
       "cryptoDash",
@@ -85,6 +90,39 @@ export class AppProvider extends React.Component {
       })
     );
   };
+
+  fetchPrices = async() => {
+    if(this.state.firstVisit) {
+      return
+    }
+    this.setState({
+      prices: []
+    })
+    let prices = await this.prices()
+    prices = prices.filter(price => Object.keys(price).length)
+    this.setState({
+      prices: prices,
+    }) 
+  }
+
+  prices = async() => {
+    let returnData = []
+    for(let i = 0; i < this.state.favorites.length; i++) {
+      try{
+        let priceData = await cc.priceFull(this.state.favorites[i], 'USD')
+        returnData.push(priceData)
+      } catch(err) {
+        console.error('Fetch Price error:',err)
+      }
+    }
+    return returnData
+  }
+
+  setFilteredCoins = filteredCoins => {
+    this.setState({
+      filteredCoins: filteredCoins,
+    })
+  }
 
   render() {
     return (

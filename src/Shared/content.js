@@ -1,15 +1,26 @@
 import React from "react";
 import { AppContext } from "../App/app-provider";
+import styled from "styled-components";
 
-export default function ({children}) {
+const StyledCenterAligned = styled.div`
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+
+`
+
+export default function ({ children }) {
   return (
     <AppContext.Consumer>
-      {({ coinsList }) => {
+      {({ coinsList, prices, firstVisit }) => {
         if (!coinsList) {
-          return <div>Loading Coins</div>;
-        } else {
-            return <div>{children}</div>
+          return <StyledCenterAligned>Loading Coins</StyledCenterAligned>;
         }
+        if (!firstVisit && (!prices || prices.length == 0)) {
+          return <StyledCenterAligned>Loading Prices</StyledCenterAligned>;
+        }
+        return <div>{children}</div>;
       }}
     </AppContext.Consumer>
   );
