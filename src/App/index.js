@@ -4,6 +4,7 @@ import AppLayout from "./app-layout";
 import AppBar from "./app-bar";
 import { AppProvider } from "./app-provider";
 import ContentLoading from "../Shared/content";
+import Dashboard from "../Dashboard";
 
 function App() {
   // TODO TAHS
@@ -13,6 +14,7 @@ function App() {
         <AppBar />
         <ContentLoading>
           <Settings />
+          <Dashboard />
         </ContentLoading>
       </AppProvider>
     </AppLayout>
