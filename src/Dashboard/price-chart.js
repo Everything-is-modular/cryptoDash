@@ -4,6 +4,9 @@ import { Tile } from "../Shared/tile";
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official'
 import { AppContext } from "../App/app-provider";
+import HighChartsTheme from './high-charts-theme'
+
+Highcharts.setOptions(HighChartsTheme)
 
 
 export default function() {
