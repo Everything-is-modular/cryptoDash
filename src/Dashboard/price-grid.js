@@ -17,8 +17,6 @@ export default function () {
                 return(
                     <StyledPriceGrid>
                         {prices.map((price, index) => {
-                            console.log('price =>', Object.keys(price)[0])
-                            
                         return <PriceTile index={index} price={price} />})}
                     </StyledPriceGrid>
                 )

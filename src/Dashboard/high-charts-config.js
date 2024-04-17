@@ -1,8 +1,8 @@
-export default function() {
+export default function(historical) {
     return {
         title: {
             text: '',
-            align: 'left'
+            align: 'right'
         },
     
         yAxis: {
@@ -10,11 +10,10 @@ export default function() {
                 text: 'Price'
             }
         },
+        
     
         xAxis: {
-            accessibility: {
-                rangeDescription: 'Range: 2010 to 2020'
-            }
+            type: 'datetime',
         },
     
         legend: {
@@ -28,11 +27,10 @@ export default function() {
                 label: {
                     connectorAllowed: false
                 },
-                pointStart: 2010
             }
         },
     
-        series: [],
+        series: historical ? historical : [],
     
         responsive: {
             rules: [{
