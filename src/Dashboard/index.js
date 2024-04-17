@@ -2,11 +2,24 @@ import React from "react";
 import styled from "styled-components";
 import Page from "../Shared/page";
 import PriceGrid from "./price-grid";
+import CoinSpotlight from "./coin-spotlight";
+
+const ChartGrid = styled.div`
+  display: grid;
+  margin-top: 20px;
+  grid-gap: 15px;
+  grid-template-columns: 1fr 3fr;
+`
+
 
 export default function () {
   return (
     <Page name="dashboard">
-      <PriceGrid></PriceGrid>
+      <PriceGrid />
+      <ChartGrid>
+      <CoinSpotlight />
+      <div>Chart goes here</div>
+      </ChartGrid>
     </Page>
   );
 }
