@@ -1,6 +1,5 @@
 // state manager of App
 import React from "react";
-import { CRYPTO_API_KEY } from "../config/config";
 import { pull, includes } from 'lodash'
 import moment from 'moment'
 const cc = require("cryptocompare");
@@ -29,7 +28,7 @@ export class AppProvider extends React.Component {
   }
 
   componentDidMount() {
-    cc.setApiKey(CRYPTO_API_KEY);
+    cc.setApiKey(process.env.CRYPTO_API_KEY);
     this.fetchCoins();
     this.fetchPrices()
     this.fetchHistorical()
